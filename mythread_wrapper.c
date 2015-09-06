@@ -14,9 +14,9 @@ void *start_new_thread_function(void *myThread)
 	return NULL;
 }
 
-int mythread_wrapper_create(mythread_t *newThread, mythread_attr_t *attr)
+int mythread_wrapper_create(mythread_t *newMyThread, mythread_attr_t *attr)
 {
 	void *stack = malloc(*attr.stacksize);
-	pid_t tid = clone(start_new_thread_function, (char *)stack + (*attr.stacksize), 0, (void *)newThread);
+	pid_t tid = clone(start_new_thread_function, (char *)stack + (*attr.stacksize), 0, (void *)newMyThread);
 	*new_thread.tid = tid;
 }
